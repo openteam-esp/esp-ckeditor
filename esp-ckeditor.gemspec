@@ -7,16 +7,16 @@ require "esp-ckeditor/version"
 Gem::Specification.new do |s|
   s.name        = "esp-ckeditor"
   s.version     = EspCkeditor::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of EspCkeditor."
-  s.description = "TODO: Description of EspCkeditor."
+  s.authors     = ["Evgeny Lapin"]
+  s.email       = ["mail@openteam.ru"]
+  s.homepage    = "http://github.com/openteam-esp/esp-ckeditor"
+  s.summary     = "EspCkeditor."
+  s.description = "EspCkeditor."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 3.1.3"
-  # s.add_dependency "jquery-rails"
+  s.add_dependency "rails"
+  s.add_dependency "formtastic"
 
   s.add_development_dependency "sqlite3"
 end

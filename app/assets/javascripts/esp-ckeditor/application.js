@@ -5,3 +5,5 @@
 // the compiled file.
 //
 //= require esp-ckeditor/ckeditor_source
+
+var CKEDITOR_BASEPATH = '/assets/esp-ckeditor/';

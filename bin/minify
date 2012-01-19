@@ -1,0 +1,63 @@
+#!/bin/bash
+
+txtbld=$(tput bold)
+txtred=$(tput setaf 1)
+bldred=${txtbld}${txtred}
+txtgrn=$(tput setaf 2)
+bldgrn=${txtbld}${txtgrn}
+txtrst=$(tput sgr0)
+
+current_path=`pwd`
+
+juicer_path=`which juicer`
+
+if [ -n "$juicer_path" ]; then
+  juicer_path=juicer
+fi
+
+if [ -e $current_path/bin/juicer ]; then
+  juicer_path=bin/juicer
+fi
+
+if [ ! -n "$juicer_path" ] && [ ! -e $current_path/bin/juicer ]; then
+  echo
+  echo "${bldred}Can't find executable juicer!${txtrst}"
+  echo "${txtgrn}Please run:${txtrst}"
+  echo "bundle install --binstubs"
+  echo "${txtgrn}or${txtrst}"
+  echo "gem install juicer"
+  echo
+  exit;
+fi
+
+if [ ! -e ~/.juicer/lib/yui_compressor/bin/yuicompressor-*.jar ]; then
+  echo
+  echo "${bldred}YUI Compressor is not installed!${txtrst}"
+  echo "${txtgrn}Please run:${txtrst}"
+  echo "$juicer_path install yui_compressor"
+  echo
+  exit;
+fi
+
+if [ ! -e ~/.juicer/lib/jslint/bin/jslint-*.js ]; then
+  echo
+  echo "${bldred}JsLint is not installed!${txtrst}"
+  echo "${txtgrn}Please run:${txtrst}"
+  echo "$juicer_path install jslint"
+  echo
+  exit;
+fi
+
+files=`find app/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
+
+start_time=$(date +%S)
+echo "${txtgrn}Start minify${txtrst}"
+for file in $files; do
+  file_path=${file%/*}
+  file_name=$(basename $file)
+  dest_path=${file_path/\/_source\///}
+  $current_path/bin/juicer merge -i -s -f -o $dest_path/$file_name $file_path/$file_name
+done
+sleep 1
+stop_time=$(date +%S)
+printf "${txtgrn}Done in:${txtrst} %.1F sec\n"  $(echo "$stop_time - $start_time"|bc )

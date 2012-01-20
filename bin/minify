@@ -3,8 +3,6 @@
 # minify ckeditor plugins from ckeditor/_source/plugins to ckeditor/plugins
 #
 
-echo $HOSTTYPE
-
 txtbld=$(tput bold)
 txtred=$(tput setaf 1)
 bldred=${txtbld}${txtred}
@@ -12,7 +10,9 @@ txtgrn=$(tput setaf 2)
 bldgrn=${txtbld}${txtgrn}
 txtrst=$(tput sgr0)
 
-current_path=`pwd`
+project_path=`pwd`
+
+java_path=`which java`
 
 juicer_path=`which juicer`
 
@@ -20,11 +20,19 @@ if [ -n "$juicer_path" ]; then
   juicer_path=juicer
 fi
 
-if [ -e $current_path/bin/juicer ]; then
+if [ -e $project_path/bin/juicer ]; then
   juicer_path=bin/juicer
 fi
 
-if [ ! -n "$juicer_path" ] & [ ! -e $current_path/bin/juicer ]; then
+if [ ! -n "$java_path" ]; then
+  echo
+  echo "${bldred}Can't find Java Runtime Environment!${txtrst}"
+  echo "${txtgrn}It need for minify JavaScripts. Please install it${txtrst}"
+  echo
+  exit 1
+fi
+
+if [ ! -n "$juicer_path" ] & [ ! -e $project_path/bin/juicer ]; then
   echo
   echo "${bldred}Can't find executable juicer!${txtrst}"
   echo "${txtgrn}Please run:${txtrst}"
@@ -58,7 +66,7 @@ function minify {
   file_path=${file%/*}
   file_name=$(basename $file)
   dest_path=${file_path/\/_source\///}
-  $current_path/bin/juicer merge -i -s -f -o $dest_path/$file_name $file_path/$file_name
+  $project_path/bin/juicer merge -i -s -f -o $dest_path/$file_name $file_path/$file_name
 }
 
 function hms() {
@@ -73,10 +81,11 @@ files="$@"
 start_time=`date +%s`
 
 if [ -n "$files" ]; then
-  echo "${txtgrn}Minify from params${txtrst}"
+  echo "${txtgrn}Minify plugins from params${txtrst}"
   echo "${txtgrn}Start minify${txtrst}"
   for file in $files; do
     if [ ! -e $file ]; then
+      echo "${txtred}Can't find $file${txtrst}"
       continue
     else
       minify $file

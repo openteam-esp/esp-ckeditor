@@ -61,12 +61,26 @@ if [ ! -e ~/.juicer/lib/jslint/bin/jslint-*.js ]; then
   exit 1
 fi
 
+echo "${bldgrn}Note:${txtrst} use --pack params for minify ckeditor.js"
+echo "      by default minify all _source/plugins javascripts"
+echo "      or specify the list of parameters for custom files minify"
+echo
+
 function minify {
   file=$1
   file_path=${file%/*}
   file_name=$(basename $file)
   dest_path=${file_path/\/_source\///}
   $project_path/bin/juicer merge -i -s -f -o $dest_path/$file_name $file_path/$file_name
+}
+
+
+function minify_all {
+  echo "${txtgrn}Start minify${txtrst}"
+  for file in $parameters; do
+    minify $file
+  done
+  echo "${txtgrn}Done${txtrst}"
 }
 
 function hms() {
@@ -76,14 +90,33 @@ function hms() {
   printf "Running time: %dm:%ds\n" $m $s
 }
 
-files="$@"
+parameters="$@"
 
-start_time=`date +%s`
+for thing in $parameters
+do
+  if [ "${thing}" = "--pack" ]; then
+    echo "${txtgrn}Minify ckeditor.js${txtrst}"
+    cd app/assets/javascripts/esp-ckeditor/
+    java -jar ckpackager.jar ckeditor.pack
+    cd $project_path
+    echo "${txtgrn}Done${txtrst}"
+    echo
+  fi
+done
 
-if [ -n "$files" ]; then
+if [ -n "$parameters" ]; then
+  if [ $# -eq 1 ] & [ "$parameters" = "--pack" ]; then
+    parameters=`find app/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
+    minify_all
+    hms
+    exit 0
+  fi
   echo "${txtgrn}Minify plugins from params${txtrst}"
   echo "${txtgrn}Start minify${txtrst}"
-  for file in $files; do
+  for file in $parameters; do
+    if [ "${file}" = "--pack" ]; then
+      continue
+    fi
     if [ ! -e $file ]; then
       echo "${txtred}Can't find $file${txtrst}"
       continue
@@ -96,13 +129,9 @@ if [ -n "$files" ]; then
   exit 0
 else
   echo "${txtgrn}Minify from ckeditor source path${txtrst}"
-  files=`find app/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
+  parameters=`find app/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
 fi
 
-echo "${txtgrn}Start minify${txtrst}"
-for file in $files; do
-  minify $file
-done
-echo "${txtgrn}Done${txtrst}"
+minify_all
 
 hms

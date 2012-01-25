@@ -1,3 +1,32 @@
 = EspCkeditor
 
+CKEditor 3.6.2 for rails >= 3.1.0 project with formtastic and el_vfs_client (optional) support.
+
+== Install
+
+To Gemfile
+
+  gem 'esp-ckeditor'
+
+and
+
+  $ bundle install
+
+or
+
+  $ gem install esp-ckeditor
+
+== Usage
+
+In layout or view include JavaScript
+
+  <%= javascript_include_tag 'esp-ckeditor/application' %>
+
+and use formtastic input <tt>:as => :ckeditor</tt>
+
+  <%= form.input :annotation, :as => :ckeditor, :input_html => { :height => 100 } %>
+  <%= form.input :text, :as => :ckeditor %>
+
+== License
+
 This project rocks and uses MIT-LICENSE.

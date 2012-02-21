@@ -13,6 +13,8 @@ CKEDITOR.editorConfig = function( config )
 
   config.disableNativeSpellChecker = false;
 
+  config.baseFloatZIndex = 1000000;
+
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
   config.filebrowserBrowseUrl = "/el_finder";

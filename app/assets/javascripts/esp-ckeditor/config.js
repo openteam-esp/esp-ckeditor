@@ -75,7 +75,7 @@ CKEDITOR.on('instanceReady', function(ev) {
 
   ev.editor.dataProcessor.writer.indentationChars = "  ";
 
-  var tags = new Array('p','h1','h2','h3','h4','h5','h6', 'td', 'li');
+  var tags = new Array('p','h1','h2','h3','h4','h5','h6', 'td', 'li', 'caption', 'th');
   for (var tag in tags) {
     ev.editor.dataProcessor.writer.setRules(tags[tag], {
       indent : false,

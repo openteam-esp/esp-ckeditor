@@ -50,10 +50,6 @@ CKEDITOR.editorConfig = function( config )
     return params;
   };
 
-  /* Extra plugins */
-  // works only with en, ru, uk locales
-  //config.extraPlugins = "embed,attachment";
-
   /* Toolbars */
   config.toolbar = 'Full'; // Используются всё, что возможно, остальное впринципе отключено
 
@@ -64,11 +60,19 @@ CKEDITOR.editorConfig = function( config )
     ['Esp_link','Esp_unlink','Esp_anchor'],
     ['Esp_image', 'Esp_attachment', 'Esp_video', 'Esp_audio', 'Table'],
     '/',
-    ['Format'],
+    ['Format','Styles'],
     ['Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','RemoveFormat'],
     ['JustifyLeft','JustifyCenter','JustifyRight'],
     ['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote'],
     ['Maximize', 'Esp_ShowBlocks']
+  ];
+
+  config.stylesSet = [
+    { name: 'Div', element: 'div' },
+    { name: 'Pre', element: 'pre' },
+    { name: 'Cite', element: 'cite' },
+    { name: 'Blockquote', element: 'blockquote' },
+    { name: 'Mark', element: 'mark' }
   ];
 
 };

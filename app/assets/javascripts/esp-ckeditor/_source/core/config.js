@@ -311,6 +311,7 @@ CKEDITOR.config =
     'resize,' +
     'showborders,' +
     'sourcearea,' +
+    'stylescombo,' +
     'tab,' +
     'table,' +
     'tabletools,' +

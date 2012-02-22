@@ -23,3 +23,11 @@ ol,ul,dl
   /* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
     padding:0 40px;
 }
+
+body blockquote
+{
+  border-left: 3px solid #ccc;
+  margin-left: 10px;
+  margin-right: 0;
+  padding-left: 10px;
+}

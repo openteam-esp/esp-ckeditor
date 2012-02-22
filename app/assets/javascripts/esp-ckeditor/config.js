@@ -15,6 +15,8 @@ CKEDITOR.editorConfig = function( config )
 
   config.baseFloatZIndex = 1000000;
 
+  config.startupOutlineBlocks = true;
+
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
   config.filebrowserBrowseUrl = "/el_finder";
@@ -60,7 +62,7 @@ CKEDITOR.editorConfig = function( config )
     ['Esp_link','Esp_unlink','Esp_anchor'],
     ['Esp_image', 'Esp_attachment', 'Esp_video', 'Esp_audio', 'Table'],
     '/',
-    ['Format','Styles','Blockquote'],
+    ['Format','Styles','Esp_Blockquote'],
     ['Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','RemoveFormat'],
     ['JustifyLeft','JustifyCenter','JustifyRight'],
     ['NumberedList','BulletedList','-','Outdent','Indent'],

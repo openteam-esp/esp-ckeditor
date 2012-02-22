@@ -125,7 +125,6 @@ packages :
 
           '_source/plugins/a11yhelp/plugin.js',
           '_source/plugins/basicstyles/plugin.js',
-          '_source/plugins/blockquote/plugin.js',
           '_source/plugins/button/plugin.js',
           '_source/plugins/clipboard/plugin.js',
           '_source/plugins/contextmenu/plugin.js',
@@ -143,6 +142,7 @@ packages :
           '_source/plugins/esp_audio/plugin.js',
           '_source/plugins/esp_audio/lang/en.js',
           '_source/plugins/esp_audio/lang/ru.js',
+          '_source/plugins/esp_blockquote/plugin.js',
           '_source/plugins/esp_image/plugin.js',
           '_source/plugins/esp_image/lang/en.js',
           '_source/plugins/esp_image/lang/ru.js',

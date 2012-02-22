@@ -29,7 +29,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
     if ( editor.readOnly )
       return;
 
-    var command = editor.getCommand( 'blockquote' );
+    var command = editor.getCommand( 'esp_blockquote' );
     command.state = getState( editor, evt.data.path );
     command.fire( 'state' );
   }
@@ -48,7 +48,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
   {
     exec : function( editor )
     {
-      var state = editor.getCommand( 'blockquote' ).state,
+      var state = editor.getCommand( 'esp_blockquote' ).state,
         selection = editor.getSelection(),
         range = selection && selection.getRanges( true )[0];
 
@@ -285,16 +285,16 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
     }
   };
 
-  CKEDITOR.plugins.add( 'blockquote',
+  CKEDITOR.plugins.add( 'esp_blockquote',
   {
     init : function( editor )
     {
-      editor.addCommand( 'blockquote', commandObject );
+      editor.addCommand( 'esp_blockquote', commandObject );
 
-      editor.ui.addButton( 'Blockquote',
+      editor.ui.addButton( 'Esp_Blockquote',
         {
           label : editor.lang.blockquote,
-          command : 'blockquote'
+          command : 'esp_blockquote'
         } );
 
       editor.on( 'selectionChange', onSelectionChange );

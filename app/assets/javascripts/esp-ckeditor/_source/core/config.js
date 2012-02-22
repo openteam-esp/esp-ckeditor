@@ -279,7 +279,6 @@ CKEDITOR.config =
   plugins :
     'a11yhelp,' +
     'basicstyles,' +
-    'blockquote,' +
     'button,' +
     'clipboard,' +
     'contextmenu,' +
@@ -289,6 +288,7 @@ CKEDITOR.config =
     'entities,' +
     'esp_attachment,' +
     'esp_audio,' +
+    'esp_blockquote,' +
     'esp_image,' +
     'esp_link,' +
     'esp_showblocks,' +

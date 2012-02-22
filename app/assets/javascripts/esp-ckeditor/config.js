@@ -51,7 +51,7 @@ CKEDITOR.editorConfig = function( config )
   };
 
   /* Toolbars */
-  config.toolbar = 'Full'; // Используются всё, что возможно, остальное впринципе отключено
+  config.toolbar = 'Full';
 
   config.toolbar_Full = [
     ['Source'],
@@ -60,18 +60,19 @@ CKEDITOR.editorConfig = function( config )
     ['Esp_link','Esp_unlink','Esp_anchor'],
     ['Esp_image', 'Esp_attachment', 'Esp_video', 'Esp_audio', 'Table'],
     '/',
-    ['Format','Styles'],
+    ['Format','Styles','Blockquote'],
     ['Bold','Italic','Underline','Strike','-','Subscript','Superscript','-','RemoveFormat'],
     ['JustifyLeft','JustifyCenter','JustifyRight'],
-    ['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote'],
+    ['NumberedList','BulletedList','-','Outdent','Indent'],
     ['Maximize', 'Esp_ShowBlocks']
   ];
 
+  /* Format tags */
+  config.format_tags = 'p;h1;h2;h3;div';
+
+  /* Style tags */
   config.stylesSet = [
-    { name: 'Div', element: 'div' },
-    { name: 'Pre', element: 'pre' },
     { name: 'Cite', element: 'cite' },
-    { name: 'Blockquote', element: 'blockquote' },
     { name: 'Mark', element: 'mark' }
   ];
 
@@ -81,7 +82,7 @@ CKEDITOR.on('instanceReady', function(ev) {
 
   ev.editor.dataProcessor.writer.indentationChars = "  ";
 
-  var tags = new Array('p','h1','h2','h3','h4','h5','h6', 'td', 'li', 'caption', 'th');
+  var tags = new Array('h1','h2','h3','h4','h5','h6', 'td', 'li', 'caption', 'th');
   for (var tag in tags) {
     ev.editor.dataProcessor.writer.setRules(tags[tag], {
       indent : false,
@@ -92,9 +93,10 @@ CKEDITOR.on('instanceReady', function(ev) {
     });
   };
 
-  var html5 = new Array('audio','video', 'source');
-  for (var tag in html5) {
-  ev.editor.dataProcessor.writer.setRules(html5[tag], {
+  tags = ['p', 'div', 'blockquote', 'pre', 'audio','video', 'source'];
+
+  for (var tag in tags) {
+    ev.editor.dataProcessor.writer.setRules(tags[tag], {
       indent : true,
       breakBeforeOpen : true,
       breakAfterOpen : true,

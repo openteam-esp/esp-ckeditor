@@ -142,6 +142,16 @@ li.cke_panel_listItem
   margin-bottom: 3px;
 }
 
+.cke_panel_listItem h1
+{
+  font-size: 22px;
+}
+
+.cke_panel_listItem blockquote
+{
+  margin: 0;
+}
+
 .cke_skin_kama .cke_button_textcolor_panel,
 .cke_skin_kama .cke_button_bgcolor_panel
 {

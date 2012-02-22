@@ -1,3 +1,3 @@
 module EspCkeditor
-  VERSION = "0.0.9.2"
+  VERSION = "0.0.9.3"
 end

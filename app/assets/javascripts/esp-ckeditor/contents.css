@@ -31,3 +31,8 @@ body blockquote
   margin-right: 0;
   padding-left: 10px;
 }
+
+body cite
+{
+  color: green
+}

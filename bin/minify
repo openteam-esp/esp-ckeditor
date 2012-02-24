@@ -71,6 +71,9 @@ function minify {
   file_path=${file%/*}
   file_name=$(basename $file)
   dest_path=${file_path/\/_source\///}
+  if [ ! -d "$dest_path" ]; then
+    mkdir $dest_path
+  fi
   $project_path/bin/juicer merge -i -s -f -o $dest_path/$file_name $file_path/$file_name
 }
 

@@ -576,7 +576,7 @@ CKEDITOR.lang['ru'] =
     label    : 'Форматирование',
     panelTitle  : 'Форматирование',
 
-    tag_p    : 'Обычное',
+    tag_p    : 'Обычное (p)',
     tag_pre    : 'Моноширинное',
     tag_address  : 'Адрес',
     tag_h1    : 'Заголовок 1',

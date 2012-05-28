@@ -179,6 +179,7 @@ packages :
           '_source/plugins/selection/plugin.js',
           '_source/plugins/showborders/plugin.js',
           '_source/plugins/sourcearea/plugin.js',
+          '_source/plugins/specialchar/plugin.js',
           '_source/plugins/styles/plugin.js',
           '_source/plugins/tab/plugin.js',
           '_source/plugins/table/plugin.js',

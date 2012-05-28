@@ -310,6 +310,7 @@ CKEDITOR.config =
     'removeformat,' +
     'resize,' +
     'showborders,' +
+    'specialchar,' +
     'sourcearea,' +
     'stylescombo,' +
     'tab,' +

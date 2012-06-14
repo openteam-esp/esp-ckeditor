@@ -24,6 +24,7 @@ CKEDITOR.plugins.add( 'esp_video',
 {
   // Translations, available at the end of this file, without extra requests
   lang: ['en', 'ru', 'uk'],
+
   init : function( editor )
   {
     var lang = editor.lang.esp_video;
@@ -103,80 +104,43 @@ CKEDITOR.plugins.add( 'esp_video',
   afterInit: function( editor )
   {
 
-  var dataProcessor = editor.dataProcessor,
-    htmlFilter = dataProcessor && dataProcessor.htmlFilter,
-    dataFilter = dataProcessor && dataProcessor.dataFilter;
-        var handler = editor.plugins.googleMapsHandler;
+    var dataProcessor = editor.dataProcessor,
+      htmlFilter = dataProcessor && dataProcessor.htmlFilter,
+      dataFilter = dataProcessor && dataProcessor.dataFilter;
 
-  // dataFilter : conversion from html input to internal data
-  dataFilter.addRules(
-    {
-
-    elements : {
-      $ : function( realElement )
+    // dataFilter : conversion from html input to internal data
+    dataFilter.addRules(
       {
-          if ( realElement.name == 'video' )
-          {
-            realElement.name = 'cke:video';
-            var fakeElement = editor.createFakeParserElement( realElement, 'cke_video', 'video', false ),
-              fakeStyle = fakeElement.attributes.style || '';
 
-            var width = realElement.attributes.width,
-              height = realElement.attributes.height,
-              poster = realElement.attributes.poster;
-
-            if ( typeof width != 'undefined' )
-              fakeStyle = fakeElement.attributes.style = fakeStyle + 'width:' + CKEDITOR.tools.cssLength( width ) + ';';
-
-            if ( typeof height != 'undefined' )
-              fakeStyle = fakeElement.attributes.style = fakeStyle + 'height:' + CKEDITOR.tools.cssLength( height ) + ';';
-
-            if ( poster )
-              fakeStyle = fakeElement.attributes.style = fakeStyle + 'background-image:url(' + poster + ');';
-
-            return fakeElement;
-          }
-      }
-    }
-
-    }
-  );
-
-  // htmlFilter : conversion from internal data to html output.
-  htmlFilter.addRules(
-    {
-      elements :
-      {
-        $ : function( element )
+      elements : {
+        $ : function( realElement )
         {
-          if ( element.name == 'img' )
-          {
-
-            var number = element.attributes.mapnumber;
-            if (number)
+            if ( realElement.name == 'video' )
             {
-              var scriptNode,
-                handler = editor.plugins.googleMapsHandler,
-                oMap = handler.getMap( number ) ;
+              realElement.name = 'cke:video';
+              var fakeElement = editor.createFakeParserElement( realElement, 'cke_video', 'video', false ),
+                fakeStyle = fakeElement.attributes.style || '';
 
-              if (oMap && oMap.generatedType>1)
-              {
-                handler.CreatedMapsNames.push( oMap.number ) ;
-                // Inject the <script> for this map
-                scriptNode = new CKEDITOR.htmlParser.cdata( oMap.BuildScript() );
-                element.parent.children.push( scriptNode );
-              }
-              delete element.attributes.mapnumber;
+              var width = realElement.attributes.width,
+                height = realElement.attributes.height,
+                poster = realElement.attributes.poster;
+
+              if ( typeof width != 'undefined' )
+                fakeStyle = fakeElement.attributes.style = fakeStyle + 'width:' + CKEDITOR.tools.cssLength( width ) + ';';
+
+              if ( typeof height != 'undefined' )
+                fakeStyle = fakeElement.attributes.style = fakeStyle + 'height:' + CKEDITOR.tools.cssLength( height ) + ';';
+
+              if ( poster )
+                fakeStyle = fakeElement.attributes.style = fakeStyle + 'background-image:url(' + poster + ');';
+
+              return fakeElement;
             }
-          }
-
-          return element;
         }
       }
-    });
 
-
+      }
+    );
 
   }
 } );
-

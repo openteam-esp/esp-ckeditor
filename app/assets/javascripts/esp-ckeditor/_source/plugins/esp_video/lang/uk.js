@@ -11,7 +11,7 @@ CKEDITOR.plugins.setLang( 'esp_video', 'uk',
     heightRequired: 'Поле "висота" не може бути порожнім',
     poster: 'Скріншот',
     sourceVideo: 'Джерело',
-    sourceType: 'Тип джерела',
+    sourceType: 'Тип',
     linkTemplate:  '<a href="%src%">%type%</a> ',
     fallbackTemplate: 'Ваш браузер не підтримує тег video. Ви можете завантажити файл: %links%'
   }

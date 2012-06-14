@@ -90,8 +90,8 @@ CKEDITOR.dialog.add( 'esp_video', function ( editor )
 
   return {
     title : lang.dialogTitle,
-    minWidth : 400,
-    minHeight : 140,
+    minWidth : 450,
+    minHeight : 235,
 
     onShow : function()
     {
@@ -106,9 +106,16 @@ CKEDITOR.dialog.add( 'esp_video', function ( editor )
         this.fakeImage = fakeImage;
 
         var videoNode = editor.restoreRealElement( fakeImage ),
-          videos = [];
+          videos = [],
+          sourceList = videoNode.getElementsByTag( 'source', '' );
+        if (sourceList.count()==0)
+          sourceList = videoNode.getElementsByTag( 'source', 'cke' );
 
-        videos.push( {src : videoNode.getAttribute( 'src' )} );
+        for ( var i = 0, length = sourceList.count() ; i < length ; i++ )
+        {
+          var item = sourceList.getItem( i );
+          videos.push( {src : item.getAttribute( 'src' ), type: item.getAttribute( 'type' )} );
+        }
 
         this.videoNode = videoNode;
 
@@ -127,8 +134,7 @@ CKEDITOR.dialog.add( 'esp_video', function ( editor )
         videoNode = CKEDITOR.dom.element.createFromHtml( '<cke:video></cke:video>', editor.document );
         videoNode.setAttributes(
           {
-            controls : 'controls',
-            src:  this.getValueOf( 'info', 'src0')
+            controls : 'controls'
           } );
       }
       else
@@ -142,8 +148,14 @@ CKEDITOR.dialog.add( 'esp_video', function ( editor )
       var innerHtml = '', links = '',
         link = lang.linkTemplate || '',
         fallbackTemplate = lang.fallbackTemplate || '';
-
-      links = link.replace('%src%', this.getValueOf('info', 'src0')).replace('%type%', this.getValueOf('info', 'src0').split('/').pop());
+      for(var i=0; i<videos.length; i++)
+      {
+        var video = videos[i];
+        if ( !video || !video.src )
+          continue;
+        innerHtml += '<cke:source src="' + video.src + '" type="' + video.type + '" />';
+        links += link.replace('%src%', video.src).replace('%type%', video.type);
+      }
       videoNode.setHtml( innerHtml + fallbackTemplate.replace( '%links%', links ) );
 
       // Refresh the fake image.
@@ -177,57 +189,7 @@ CKEDITOR.dialog.add( 'esp_video', function ( editor )
         [
           {
             type : 'hbox',
-            widths: [ '320px', '80px'],
-            children : [
-              {
-                type : 'text',
-                id : 'src0',
-                label : lang.sourceVideo,
-                commit : commitSrc,
-                setup : loadSrc
-              },
-              {
-                type : 'button',
-                id : 'browse',
-                hidden : 'true',
-                style : 'display:inline-block;margin-top:10px;',
-                filebrowser :
-                {
-                  action : 'Browse',
-                  target: 'info:src0',
-                  url: editor.config.filebrowserVideoBrowseUrl || editor.config.filebrowserBrowseUrl
-                },
-                label : editor.lang.esp_video.browseServer
-              }
-            ]
-          },
-          {
-            type : 'hbox',
-            widths: [ '50%', '50%'],
-            children : [
-              {
-                type : 'text',
-                id : 'width',
-                label : editor.lang.common.width,
-                'default' : 512,
-                validate : CKEDITOR.dialog.validate.notEmpty( lang.widthRequired ),
-                commit : commitValue,
-                setup : loadValue
-              },
-              {
-                type : 'text',
-                id : 'height',
-                label : editor.lang.common.height,
-                'default' : 410,
-                validate : CKEDITOR.dialog.validate.notEmpty(lang.heightRequired ),
-                commit : commitValue,
-                setup : loadValue
-              }
-            ]
-          },
-          {
-            type : 'hbox',
-            widths: [ '320px', '80px'],
+            widths: [ '', '100px'],
             children : [
               {
                 type : 'text',
@@ -264,9 +226,151 @@ CKEDITOR.dialog.add( 'esp_video', function ( editor )
                   target: 'info:poster',
                   url: editor.config.filebrowserImageBrowseUrl || editor.config.filebrowserBrowseUrl
                 },
-                label : editor.lang.esp_video.browseServer
+                label : editor.lang.common.browseServer
+              }]
+          },
+          {
+            type : 'hbox',
+            widths: [ '50%', '50%'],
+            children : [
+              {
+                type : 'text',
+                id : 'width',
+                label : editor.lang.common.width,
+                'default' : 512,
+                validate : CKEDITOR.dialog.validate.notEmpty( lang.widthRequired ),
+                commit : commitValue,
+                setup : loadValue
+              },
+              {
+                type : 'text',
+                id : 'height',
+                label : editor.lang.common.height,
+                'default' : 410,
+                validate : CKEDITOR.dialog.validate.notEmpty(lang.heightRequired ),
+                commit : commitValue,
+                setup : loadValue
               }
             ]
+          },
+          {
+            type : 'hbox',
+            widths: [ '', '55px', '100px'],
+            children : [
+              {
+                type : 'text',
+                id : 'src0',
+                label : lang.sourceVideo,
+                commit : commitSrc,
+                setup : loadSrc
+              },
+              {
+                id : 'type0',
+                label : lang.sourceType,
+                type : 'select',
+                'default' : 'video/mp4',
+                items :
+                [
+                  [ 'MP4', 'video/mp4' ],
+                  [ 'WebM', 'video/webm' ],
+                  [ 'OGV', 'video/ogg' ]
+                ],
+                commit : commitSrc,
+                setup : loadSrc
+              },
+              {
+                type : 'button',
+                id : 'browse',
+                hidden : 'true',
+                style : 'display:inline-block;margin-top:10px;',
+                filebrowser :
+                {
+                  action : 'Browse',
+                  target: 'info:src0',
+                  url: editor.config.filebrowserVideoBrowseUrl || editor.config.filebrowserBrowseUrl
+                },
+                label : editor.lang.common.browseServer
+              }]
+          },
+
+          {
+            type : 'hbox',
+            widths: [ '', '55px', '100px'],
+            children : [
+              {
+                type : 'text',
+                id : 'src1',
+                label : lang.sourceVideo,
+                commit : commitSrc,
+                setup : loadSrc
+              },
+              {
+                id : 'type1',
+                label : lang.sourceType,
+                type : 'select',
+                'default':'video/webm',
+                items :
+                [
+                  [ 'MP4', 'video/mp4' ],
+                  [ 'WebM', 'video/webm' ],
+                  [ 'OGV', 'video/ogg' ]
+                ],
+                commit : commitSrc,
+                setup : loadSrc
+              },
+              {
+                type : 'button',
+                id : 'browse',
+                hidden : 'true',
+                style : 'display:inline-block;margin-top:10px;',
+                filebrowser :
+                {
+                  action : 'Browse',
+                  target: 'info:src1',
+                  url: editor.config.filebrowserVideoBrowseUrl || editor.config.filebrowserBrowseUrl
+                },
+                label : editor.lang.common.browseServer
+              }]
+          },
+
+          {
+            type : 'hbox',
+            widths: [ '', '55px', '100px'],
+            children : [
+              {
+                type : 'text',
+                id : 'src2',
+                label : lang.sourceVideo,
+                commit : commitSrc,
+                setup : loadSrc
+              },
+              {
+                id : 'type2',
+                label : lang.sourceType,
+                type : 'select',
+                'default':'video/ogg',
+                items :
+                [
+                  [ 'MP4', 'video/mp4' ],
+                  [ 'WebM', 'video/webm' ],
+                  [ 'OGV', 'video/ogg' ]
+                ],
+                commit : commitSrc,
+                setup : loadSrc
+              },
+              {
+                type : 'button',
+                id : 'browse',
+                hidden : 'true',
+                style : 'display:inline-block;margin-top:10px;',
+                filebrowser :
+                {
+                  action : 'Browse',
+                  target: 'info:src2',
+                  url: editor.config.filebrowserVideoBrowseUrl || editor.config.filebrowserBrowseUrl
+                },
+                label : editor.lang.common.browseServer
+              }]
           }
         ]
       }
@@ -274,4 +378,3 @@ CKEDITOR.dialog.add( 'esp_video', function ( editor )
     ]
   };
 } );
-

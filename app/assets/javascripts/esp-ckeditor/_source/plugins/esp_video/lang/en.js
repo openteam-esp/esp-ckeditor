@@ -11,7 +11,7 @@ CKEDITOR.plugins.setLang( 'esp_video', 'en',
     heightRequired: 'Height field cannot be empty',
     poster: 'Poster image',
     sourceVideo: 'Source video',
-    sourceType: 'Video type',
+    sourceType: 'Type',
     linkTemplate:  '<a href="%src%">%type%</a> ',
     fallbackTemplate: 'Your browser doesn\'t support video. Please download the file: %links%'
   }

@@ -71,8 +71,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
       };
       if ( mode == 'onResetSize' ) {
         var link = dialog.getValueOf( 'info', 'txtUrl' );
-        if ( link.search( /\/[0-9]+-[0-9]+/ ) != -1 ) {
-          link = link.replace( /\/[0-9]+-[0-9]+/, '' );
+        if ( link.search( /\/[0-9]+-[0-9]+\// ) != -1 ) {
+          link = link.replace( /\/[0-9]+-[0-9]+\//, '/' );
         } else {
           return false;
         };

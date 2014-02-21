@@ -18,9 +18,9 @@ or
 
 == Usage
 
-In layout or view include JavaScript
+Add to your <code>application.js</code>:
 
-  <%= javascript_include_tag 'esp-ckeditor/application' %>
+  //= require esp-ckeditor
 
 and use textarea with <tt>:class => :ckeditor</tt>
 

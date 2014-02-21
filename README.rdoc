@@ -21,6 +21,10 @@ or
 Add to your <code>application.js</code>:
 
   //= require esp-ckeditor
+  
+or include <code>javascript_include_tag</code> in view:
+
+  <%= javascript_include_tag 'esp-ckeditor' %>
 
 and use textarea with <tt>:class => :ckeditor</tt>
 

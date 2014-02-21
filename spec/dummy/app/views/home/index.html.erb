@@ -1,5 +1,1 @@
-<%= semantic_form_for :ckeditor do | form | %>
-  <%= form.inputs do %>
-    <%= form.input :text, :as => :ckeditor, :input_html => { :height => 200, :width => '80%' } %>
-  <% end %>
-<% end %>
+<%= text_area_tag :text, nil, :rows => 20, cols: 100, :class => :ckeditor %>

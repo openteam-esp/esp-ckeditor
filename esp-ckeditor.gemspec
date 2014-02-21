@@ -15,9 +15,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
 
-  s.add_dependency 'formtastic'
-  s.add_dependency 'rails'
-
+  s.add_development_dependency 'rails', '~> 3.2.15'
   s.add_development_dependency 'juicer'
   s.add_development_dependency 'sass-rails'
+
 end

@@ -99,7 +99,7 @@ for thing in $parameters
 do
   if [ "${thing}" = "--pack" ]; then
     echo "${txtgrn}Minify ckeditor.js${txtrst}"
-    cd app/assets/javascripts/esp-ckeditor/
+    cd vendor/assets/javascripts/esp-ckeditor/
     java -jar ckpackager.jar ckeditor.pack
     cd $project_path
     echo "${txtgrn}Done${txtrst}"
@@ -109,7 +109,7 @@ done
 
 if [ -n "$parameters" ]; then
   if [ $# -eq 1 ] & [ "$parameters" = "--pack" ]; then
-    parameters=`find app/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
+    parameters=`find vendor/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
     minify_all
     hms
     exit 0
@@ -132,7 +132,7 @@ if [ -n "$parameters" ]; then
   exit 0
 else
   echo "${txtgrn}Minify from ckeditor source path${txtrst}"
-  parameters=`find app/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
+  parameters=`find vendor/assets/javascripts/esp-ckeditor/_source/plugins/ -name *.js`
 fi
 
 minify_all

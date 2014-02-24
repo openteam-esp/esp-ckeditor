@@ -1,6 +1,6 @@
 = EspCkeditor
 
-CKEditor 3.6.2 for rails >= 3.1.0 project with el_vfs_client (optional) support.
+CKEditor 3.6.2 for rails >= 3.1.0 project with {el_vfs_client}[https://github.com/openteam/el_vfs_client] (optional) support.
 
 == Install
 

@@ -9,6 +9,8 @@ CKEDITOR.editorConfig = function( config )
   // config.language = 'fr';
   // config.uiColor = '#AADC6E';
 
+  config.customConfig = 'custom_config.js';
+
   config.fillEmptyBlocks = false;
 
   config.disableNativeSpellChecker = false;

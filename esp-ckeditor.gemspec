@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'juicer'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'uglifier'
+  s.add_development_dependency 'turbo-sprockets-rails3'
 
 end

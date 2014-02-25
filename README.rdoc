@@ -28,6 +28,14 @@ or include <code>javascript_include_tag</code> in view:
 
 and use textarea with <tt>:class => :ckeditor</tt>
 
+== Customize config.js
+
+Run generator:
+
+  rails g esp_ckeditor:install_config
+  
+and customize config <code>vendor/assets/javascripts/esp-ckeditor/config.js</code>
+
 == License
 
 This project rocks and uses MIT-LICENSE.

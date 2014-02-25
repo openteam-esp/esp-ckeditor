@@ -18,6 +18,8 @@ or
 
 == Usage
 
+Use textarea with <tt>:class => :ckeditor</tt>
+
 Add to your <code>application.js</code>:
 
   //= require esp-ckeditor
@@ -26,15 +28,23 @@ or include <code>javascript_include_tag</code> in view:
 
   <%= javascript_include_tag 'esp-ckeditor' %>
 
-and use textarea with <tt>:class => :ckeditor</tt>
+IMPORTANT: do not forget add the file to precompile additional assets in <code>config/environments/production.rb</code>
+if you are include js via javascript_include_tag:
 
-== Customize config.js
+  config.assets.precompile += %w( esp-ckeditor.js )
+  
+
+== Customize settings CKEeditor
 
 Run generator:
 
   rails g esp_ckeditor:install_config
   
-and customize config <code>vendor/assets/javascripts/esp-ckeditor/config.js</code>
+and customize <code>vendor/assets/javascripts/esp-ckeditor/custom_config.js</code>
+  
+IMPORTANT: do not forget add the file to precompile additional assets in <code>config/environments/production.rb</code>:
+
+  config.assets.precompile += %w( esp-ckeditor/custom_config.js )
 
 == License
 

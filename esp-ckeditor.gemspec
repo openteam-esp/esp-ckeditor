@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails', '~> 3.2.15'
   s.add_development_dependency 'juicer'
   s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'uglifier'
 
 end

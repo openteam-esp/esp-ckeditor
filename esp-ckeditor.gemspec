@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   s.add_development_dependency 'rails', '~> 3.2.15'
-  s.add_development_dependency 'juicer'
+  s.add_development_dependency 'juicer', '= 1.1.2'
+  s.add_development_dependency 'cmdparse', '= 2.0.6'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'uglifier'
   s.add_development_dependency 'turbo-sprockets-rails3'

@@ -4,5 +4,5 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require esp-ckeditor/init_ckeditor
-//= require esp-ckeditor/ckeditor
+//= require init_ckeditor
+//= require ckeditor
